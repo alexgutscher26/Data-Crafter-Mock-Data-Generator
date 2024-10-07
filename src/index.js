@@ -1,12 +1,40 @@
 // src/index.js
 const faker = require('faker');
 const fs = require('fs');
+const path = require('path');
 const json2csv = require('json2csv').parse;
 const xmlbuilder = require('xmlbuilder');
 
 // Set locale for faker
 function setLocale(locale) {
     faker.locale = locale;
+}
+
+// Set seed for reproducibility
+function setSeed(seed) {
+    if (seed) {
+        faker.seed(seed);
+    }
+}
+
+// Helper function to generate relationships
+function generateDataWithRelationships(userCount, orderCount) {
+    const users = generateMockUser(userCount);
+    const orders = [];
+
+    for (let i = 0; i < orderCount; i++) {
+        const userId = faker.random.arrayElement(users).id;
+        orders.push({
+            id: faker.datatype.uuid(),
+            userId,
+            productList: Array.from({ length: faker.datatype.number({ min: 1, max: 5 }) }, () => faker.datatype.uuid()),
+            totalAmount: faker.finance.amount(),
+            orderDate: faker.date.past(),
+            deliveryDate: faker.date.future(),
+        });
+    }
+
+    return { users, orders };
 }
 
 // Helper function to generate string values
@@ -129,9 +157,11 @@ function generateCustomSchemaData(schema, count = 1, locale = 'en') {
     return data;
 }
 
-// A function to generate mock user data with localization support
-function generateMockUser(count = 1, locale = 'en') {
+// Updated function to include seeding and relationships
+function generateMockUser(count = 1, locale = 'en', seed = null) {
     setLocale(locale);
+    setSeed(seed);
+
     const users = [];
     for (let i = 0; i < count; i++) {
         users.push({
@@ -173,8 +203,10 @@ function exportData(data, format = 'json', filePath = 'output') {
     }
 }
 
+
 module.exports = {
     generateMockUser,
     generateCustomSchemaData,
     exportData,
+    generateDataWithRelationships,
 };
