@@ -101,11 +101,10 @@ Here's an example of how a schema JSON file might look:
 
 We welcome contributions from everyone! Whether you’re a seasoned developer or just starting, your input can help us improve this project.
 
-**Guidelines**
-Code Style: Please follow the existing code style and conventions used in the project. If applicable, run tests to ensure your changes do not break existing functionality.
+**Guidelines Code Style**: Please follow the existing code style and conventions used in the project. If applicable, run tests to ensure your changes do not break existing functionality.
 
-Documentation: If your changes introduce new features, please update the documentation accordingly. Clear documentation helps users understand how to use the new features.
+**Documentation**: If your changes introduce new features, please update the documentation accordingly. Clear documentation helps users understand how to use the new features.
 
-Issue Tracking: Before starting work on a new feature or bug fix, check the existing issues to see if someone else is already working on it. If you want to work on an unclaimed issue, consider commenting on it to express your interest.
+**Issue Tracking**: Before starting work on a new feature or bug fix, check the existing issues to see if someone else is already working on it. If you want to work on an unclaimed issue, consider commenting on it to express your interest.
 
-Respect the Community: Be respectful and considerate of other contributors. We strive to maintain a friendly and inclusive environment.
+**Respect the Community**: Be respectful and considerate of other contributors. We strive to maintain a friendly and inclusive environment.
