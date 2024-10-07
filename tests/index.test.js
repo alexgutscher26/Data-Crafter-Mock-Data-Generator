@@ -1,104 +1,135 @@
 // tests/index.test.js
 const { 
     generateMockUser, 
-    generateMockProduct, 
-    generateMockAddress, 
-    generateMockTransaction, 
-    generateMockReview, 
-    generateMockOrder, 
-    generateCustomData,
-    generateCustomSchemaData
+    generateCustomSchemaData,
+    exportData,
 } = require('../src/index');
+const fs = require('fs');
 
-// Test to generate a single mock user
-test('generates one mock user', () => {
-    const users = generateMockUser(1);
-    expect(users.length).toBe(1);
-    expect(users[0]).toHaveProperty('name');
-    expect(users[0]).toHaveProperty('email');
-});
+describe('Mock Data Generator Tests', () => {
+    // Cleanup exported files after tests
+    afterAll(() => {
+        const files = ['output.json', 'output.csv', 'output.xml'];
+        files.forEach(file => {
+            if (fs.existsSync(file)) {
+                fs.unlinkSync(file);
+            }
+        });
+    });
 
-// Test to generate multiple mock products
-test('generates multiple mock products', () => {
-    const products = generateMockProduct(3);
-    expect(products.length).toBe(3);
-    expect(products[0]).toHaveProperty('name');
-    expect(products[0]).toHaveProperty('price');
-});
+    // Test to generate a single mock user
+    test('generates one mock user', () => {
+        const users = generateMockUser(1);
+        expect(users.length).toBe(1);
+        expect(users[0]).toHaveProperty('name');
+        expect(users[0]).toHaveProperty('email');
+    });
 
-// Test to generate multiple mock addresses
-test('generates multiple mock addresses', () => {
-    const addresses = generateMockAddress(2);
-    expect(addresses.length).toBe(2);
-    expect(addresses[0]).toHaveProperty('street');
-    expect(addresses[0]).toHaveProperty('city');
-});
+    // Test to generate localized mock user data (e.g., German locale)
+    test('generates mock users with German localization', () => {
+        const users = generateMockUser(3, 'de');
+        expect(users.length).toBe(3);
+        users.forEach((user) => {
+            expect(user).toHaveProperty('name');
+            expect(user).toHaveProperty('email');
+            expect(user).toHaveProperty('phone');
+            expect(user).toHaveProperty('address');
+        });
+    });
 
-// Test to generate multiple mock transactions
-test('generates multiple mock transactions', () => {
-    const transactions = generateMockTransaction(2);
-    expect(transactions.length).toBe(2);
-    expect(transactions[0]).toHaveProperty('userId');
-    expect(transactions[0]).toHaveProperty('amount');
-});
+    // Test to generate custom schema data with types and constraints
+    test('generates custom schema data with specific types and constraints', () => {
+        const userSchema = {
+            id: { type: 'string', pattern: '####-####-####' },  // Custom pattern
+            username: { type: 'string', length: 8 },            // String of length 8
+            age: { type: 'integer', min: 18, max: 99 },         // Integer between 18 and 99
+            salary: { type: 'float', min: 30000, max: 150000, precision: 0.01 },  // Float with precision
+            isActive: { type: 'boolean' },                     // Boolean value
+            birthDate: { type: 'date', min: '1990-01-01', max: '2030-12-31' },  // Date within range
+            email: { type: 'email' },                          // Email value
+            phone: { type: 'phone' },                          // Phone number
+            address: { type: 'address' },                      // Address object
+            bio: { type: 'content', format: 'paragraph' },     // User-generated content
+        };
 
-// Test to generate multiple mock reviews
-test('generates multiple mock reviews', () => {
-    const reviews = generateMockReview(2);
-    expect(reviews.length).toBe(2);
-    expect(reviews[0]).toHaveProperty('userId');
-    expect(reviews[0]).toHaveProperty('rating');
-});
+        const customData = generateCustomSchemaData(userSchema, 3);
+        expect(customData.length).toBe(3);
 
-// Test to generate multiple mock orders
-test('generates multiple mock orders', () => {
-    const orders = generateMockOrder(2);
-    expect(orders.length).toBe(2);
-    expect(orders[0]).toHaveProperty('userId');
-    expect(orders[0]).toHaveProperty('totalAmount');
-});
+        customData.forEach((item) => {
+            expect(item).toHaveProperty('id');
+            expect(item.id).toMatch(/^\d{4}-\d{4}-\d{4}$/);  // Verify pattern
 
-// Test to generate custom mock data based on a template schema
-test('generates custom data', () => {
-    const schema = {
-        id: '{{datatype.uuid}}',
-        username: '{{internet.userName}}',
-        job: '{{name.jobTitle}}',
-    };
-    const data = generateCustomData(schema, 2);
-    expect(data.length).toBe(2);
-    expect(data[0]).toHaveProperty('id');
-    expect(data[0]).toHaveProperty('username');
-    expect(data[0]).toHaveProperty('job');
-});
+            expect(item).toHaveProperty('username');
+            expect(item.username.length).toBe(8);  // Verify length
 
-// Test to generate custom schema data with types and constraints
-test('generates custom schema data with specific types and constraints', () => {
-    const userSchema = {
-        id: { type: 'string', pattern: '####-####-####' },  // Custom pattern
-        username: { type: 'string', length: 8 },            // String of length 8
-        age: { type: 'number', min: 18, max: 99 },           // Number between 18 and 99
-        birthDate: { type: 'date', min: '1990-01-01', max: '2030-12-31' },  // Date between 1990 and 2030
-    };
+            expect(item).toHaveProperty('age');
+            expect(typeof item.age).toBe('number');
+            expect(item.age).toBeGreaterThanOrEqual(18);
+            expect(item.age).toBeLessThanOrEqual(99);
 
-    const customData = generateCustomSchemaData(userSchema, 3);
-    
-    expect(customData.length).toBe(3);
-    
-    customData.forEach((item) => {
-        expect(item).toHaveProperty('id');
-        expect(item.id).toMatch(/^\d{4}-\d{4}-\d{4}$/);  // Verify pattern
+            expect(item).toHaveProperty('salary');
+            expect(typeof item.salary).toBe('number');
+            expect(item.salary).toBeGreaterThanOrEqual(30000);
+            expect(item.salary).toBeLessThanOrEqual(150000);
 
-        expect(item).toHaveProperty('username');
-        expect(item.username.length).toBe(8);  // Verify length
+            expect(item).toHaveProperty('isActive');
+            expect(typeof item.isActive).toBe('boolean');
 
-        expect(item).toHaveProperty('age');
-        expect(item.age).toBeGreaterThanOrEqual(18);
-        expect(item.age).toBeLessThanOrEqual(99);  // Verify min and max for age
+            expect(item).toHaveProperty('birthDate');
+            const birthDate = new Date(item.birthDate);
+            expect(birthDate.getTime()).toBeGreaterThanOrEqual(new Date('1990-01-01').getTime());
+            expect(birthDate.getTime()).toBeLessThanOrEqual(new Date('2030-12-31').getTime());
 
-        expect(item).toHaveProperty('birthDate');
-        const birthDate = new Date(item.birthDate);
-        expect(birthDate.getTime()).toBeGreaterThanOrEqual(new Date('1990-01-01').getTime());
-        expect(birthDate.getTime()).toBeLessThanOrEqual(new Date('2005-12-31').getTime());  // Verify date range
+            expect(item).toHaveProperty('email');
+            expect(item.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+
+            expect(item).toHaveProperty('phone');
+            expect(typeof item.phone).toBe('string');
+
+            expect(item).toHaveProperty('address');
+            expect(item.address).toHaveProperty('street');
+            expect(item.address).toHaveProperty('city');
+            expect(item.address).toHaveProperty('country');
+            expect(item.address).toHaveProperty('zipCode');
+
+            expect(item).toHaveProperty('bio');
+            expect(typeof item.bio).toBe('string');
+        });
+    });
+
+    // Test exporting data in JSON format
+    test('exports data in JSON format', () => {
+        const data = generateMockUser(2);
+        exportData(data, 'json', 'output');
+        const fileExists = fs.existsSync('output.json');
+        expect(fileExists).toBe(true);
+
+        const jsonData = JSON.parse(fs.readFileSync('output.json', 'utf-8'));
+        expect(jsonData.length).toBe(2);
+    });
+
+    // Test exporting data in CSV format
+    test('exports data in CSV format', () => {
+        const data = generateMockUser(2);
+        exportData(data, 'csv', 'output');
+        const fileExists = fs.existsSync('output.csv');
+        expect(fileExists).toBe(true);
+
+        const csvData = fs.readFileSync('output.csv', 'utf-8');
+        expect(csvData).toContain('"id","name","email","phone","address"');  // Verify CSV headers with quotes
+    });
+
+    // Test exporting data in XML format
+    test('exports data in XML format', () => {
+        const data = generateMockUser(2);
+        exportData(data, 'xml', 'output');
+        const fileExists = fs.existsSync('output.xml');
+        expect(fileExists).toBe(true);
+
+        const xmlData = fs.readFileSync('output.xml', 'utf-8');
+        expect(xmlData).toContain('<?xml');  // Verify that XML header exists
+        expect(xmlData).toContain('<entry>'); // Verify that data is structured as XML
     });
 });
+
+

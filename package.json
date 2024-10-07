@@ -12,27 +12,33 @@
   },
   "author": "Alex G.",
   "license": "MIT",
-"keywords": [
-  "mock", 
-  "data", 
-  "generator", 
-  "testing", 
-  "mock-data-generator",
-  "faker",
-  "dummy-data",
-  "test-data",
-  "random",
-  "automation",
-  "fixtures",
-  "development",
-  "mocking",
-  "prototype",
-  "json-generator",
-  "api-testing",
-  "data-automation"
-],
+  "keywords": [
+    "mock",
+    "data",
+    "generator",
+    "testing",
+    "mock-data-generator",
+    "faker",
+    "dummy-data",
+    "test-data",
+    "random",
+    "automation",
+    "fixtures",
+    "development",
+    "mocking",
+    "prototype",
+    "json-generator",
+    "api-testing",
+    "data-automation"
+  ],
   "dependencies": {
-    "faker": "^5.5.3"
+    "csv-parse": "^5.5.6",
+    "data-crafter": "^1.0.1",
+    "faker": "^5.5.3",
+    "fs": "^0.0.1-security",
+    "json2csv": "^6.0.0-alpha.2",
+    "xml2js": "^0.6.2",
+    "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
     "jest": "^27.0.6"
