@@ -1,6 +1,6 @@
 {
   "name": "data-crafter",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A package to generate mock data for testing",
   "main": "src/index.js",
   "scripts": {
