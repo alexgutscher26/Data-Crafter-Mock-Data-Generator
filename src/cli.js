@@ -2,6 +2,7 @@
 const { generateMockUser, generateCustomSchemaData, exportData } = require('./index');
 const yargs = require('yargs');
 const path = require('path');
+const fs = require('fs');
 
 // Command-line interface using yargs
 yargs
@@ -62,14 +63,26 @@ yargs
             });
         },
         (argv) => {
-            const schema = require(path.resolve(argv.schema));
-            const data = generateCustomSchemaData(schema, argv.count, argv.locale);
-            if (argv.output) {
-                const filePath = path.resolve(argv.output);
-                exportData(data, 'json', filePath);
-                console.log(`Custom data exported to ${filePath}.json`);
-            } else {
-                console.log(data);
+            try {
+                const schemaPath = path.resolve(argv.schema);
+                
+                // Check if schema file exists
+                if (!fs.existsSync(schemaPath)) {
+                    throw new Error(`Schema file not found at ${schemaPath}`);
+                }
+
+                const schema = require(schemaPath);
+                const data = generateCustomSchemaData(schema, argv.count, argv.locale);
+                
+                if (argv.output) {
+                    const filePath = path.resolve(argv.output);
+                    exportData(data, 'json', filePath);
+                    console.log(`Custom data exported to ${filePath}.json`);
+                } else {
+                    console.log(data);
+                }
+            } catch (error) {
+                console.error(`Error: ${error.message}`);
             }
         }
     )

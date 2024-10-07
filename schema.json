@@ -1,0 +1,5 @@
+{
+    "username": { "type": "string", "length": 10 },
+    "age": { "type": "integer", "min": 18, "max": 99 },
+    "email": { "type": "email" }
+}
