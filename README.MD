@@ -1,10 +1,15 @@
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
 
-# Mock Data Generator
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#mock-data-generator)
+
+# ➤ Mock Data Generator
 
 A simple npm package to generate mock data for testing purposes. It supports generating various types of mock data such as users, products, addresses, transactions, reviews, and orders.
 
 
-## Table of Contents
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+
+## ➤ Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -34,39 +39,53 @@ If you want to use it as a local package for testing or development purposes, yo
 
 ```sh
 npm install ../path/to/mock-data-generator
-## Usage
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#usage)
+
+## ➤ Usage
 
 This package provides several functions for generating different types of mock data. Below are the detailed examples to help you get started.
 
 To use the package, import the functions you need:
 
 ```
-const { 
-    generateMockUser, 
-    generateMockProduct, 
-    generateMockAddress, 
-    generateMockTransaction, 
+
+const {
+    generateMockUser,
+    generateMockProduct,
+    generateMockAddress,
+    generateMockTransaction,
     generateMockReview,
     generateMockOrder,
     generateCustomData
 } = require('mock-data-generator');
+
 ```
-# Generating-Mock-Data
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generating-mock-data)
+
+# ➤ Generating-Mock-Data
 
 The following examples show how to generate various types of mock data:
 
-## Generate Mock Users
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-users)
+
+## ➤ Generate Mock Users
 
 To generate a single mock user:
 
 ```
+
 const user = generateMockUser(1);
 console.log(user);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174000",
@@ -76,26 +95,38 @@ Example Output:
     "address": "123 Main St"
   }
 ]
-```
-
-## To generate multiple mock users:
 
 ```
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#to-generate-multiple-mock-users)
+
+## ➤ To generate multiple mock users:
+
+```
+
 const users = generateMockUser(5);
 console.log(users);
+
 ```
 
-## Generate Mock Products
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-products)
+
+## ➤ Generate Mock Products
 To generate mock products, each with attributes like name, price, and category:
 
 ```
+
 const products = generateMockProduct(3);
 console.log(products);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174001",
@@ -105,19 +136,26 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Generate Mock Addresses
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-addresses)
+
+## ➤ Generate Mock Addresses
 To generate multiple mock addresses:
 
 ```
+
 const addresses = generateMockAddress(4);
 console.log(addresses);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174002",
@@ -127,19 +165,26 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Generate Mock Transactions
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-transactions)
+
+## ➤ Generate Mock Transactions
 To generate mock transactions, which can simulate payment or order data:
 
 ```
+
 const transactions = generateMockTransaction(2);
 console.log(transactions);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174003",
@@ -150,19 +195,26 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Generate Mock Reviews
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-reviews)
+
+## ➤ Generate Mock Reviews
 To generate mock reviews, which can be associated with users and products:
 
 ```
+
 const reviews = generateMockReview(3);
 console.log(reviews);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174004",
@@ -174,19 +226,26 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Generate Mock Orders
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-mock-orders)
+
+## ➤ Generate Mock Orders
 To generate mock orders, which contain lists of product IDs:
 
 ```
+
 const orders = generateMockOrder(2);
 console.log(orders);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174005",
@@ -198,24 +257,31 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Generate Custom Data
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#generate-custom-data)
+
+## ➤ Generate Custom Data
 You can also generate custom data using a schema that you define:
 
 ```
+
 const schema = {
-    id: '{{datatype.uuid}}',
-    username: '{{internet.userName}}',
-    job: '{{name.jobTitle}}',
+    id: 'datatype.uuid',
+    username: 'internet.userName',
+    job: 'name.jobTitle',
 };
 const customData = generateCustomData(schema, 3);
 console.log(customData);
+
 ```
 
 Example Output:
 
 ```
+
 [
   {
     "id": "123e4567-e89b-12d3-a456-426614174006",
@@ -224,13 +290,18 @@ Example Output:
   },
   ...
 ]
+
 ```
 
-## Example Usage in an API
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#example-usage-in-an-api)
+
+## ➤ Example Usage in an API
 
 You can use this package in your Express API to create endpoints that return mock data, which can be useful for frontend development or testing:
 
 ```
+
 const express = require('express');
 const { generateMockUser, generateMockProduct } = require('mock-data-generator');
 
@@ -247,15 +318,20 @@ app.get('/api/mock-products', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
+    console.log('Server running at <http://localhost:3000>');
 });
+
 ```
 
-## Example Usage in Testing
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#example-usage-in-testing)
+
+## ➤ Example Usage in Testing
 
 Mock data is also very useful for testing purposes, and you can integrate it easily into your test suite:
 
 ```
+
 const { generateMockUser } = require('mock-data-generator');
 
 // Mock function to simulate saving users to a database
@@ -272,20 +348,32 @@ test('should save multiple mock users to database', () => {
     expect(() => saveUsersToDatabase(mockUsers)).not.toThrow();
     expect(saveUsersToDatabase(mockUsers)).toBe(true);
 });
+
 ```
 
-## Running Tests
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#running-tests)
+
+## ➤ Running Tests
 
 This package includes tests using Jest. To run the tests:
 
 ```
+
 npm test
+
 ```
-## Contributing
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributing)
+
+## ➤ Contributing
 
 Feel free to contribute to the project by opening issues or pull requests. You can add more specific data generators (such as orders, reviews, etc.) or any other features that may be useful.
 
 
-## License
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
+
+## ➤ License
 
 This project is licensed under the MIT License.

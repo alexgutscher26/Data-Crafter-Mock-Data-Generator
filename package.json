@@ -4,18 +4,19 @@
   "description": "A package to generate mock data for testing",
   "main": "src/index.js",
   "scripts": {
-      "test": "jest"
+    "test": "jest"
   },
   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/yourusername/mock-data-generator.git"
+    "type": "git",
+    "url": "git+https://github.com/alexgutscher26/mock-data-generator"
   },
-  "author": "Your Name",
+  "author": "Alex G.",
   "license": "MIT",
   "dependencies": {
-      "faker": "^5.5.3"
+    "faker": "^5.5.3"
   },
   "devDependencies": {
-      "jest": "^27.0.6"
+    "@appnest/readme": "^1.2.7",
+    "jest": "^27.0.6"
   }
 }
