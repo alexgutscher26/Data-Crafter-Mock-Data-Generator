@@ -6,8 +6,7 @@
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
   - [Installation](#installation)
-  - [Features](#features)
-  - [Technologies Used](#technologies-used)
+  - [Usage](#usage)
 
 ## About the Project
 
@@ -35,23 +34,22 @@ If you want to use it as a local package for testing or development purposes, yo
 npm install ../path/to/data-crafter
 ```
 
-## Features
+## Usage
 
-- List your project features here.
-- Highlight key functionalities that make your project stand out.
+1. Generate Mock Users
 
-Example:
+```sh
+Command: generate:user
+```
 
-- Task creation, editing, and deletion
-- Responsive user interface
-- Data persistence with local storage
+Options:
 
-## Technologies Used
+--count (optional): Number of users to generate (default is 1).
+--locale (optional): Locale for the generated data (default is 'en').
+--output (optional): File path to export the generated data as a JSON file.
 
-- List the main technologies, frameworks, or libraries used in this project.
+Example Usage:
 
-Example:
-
-- **Frontend:** React, Bootstrap
-- **Backend:** Node.js, Express
-- **Database:** MongoDB
+```sh
+node src/cli.js generate:user --count 5 --locale de --output users.json
+```
