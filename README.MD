@@ -13,8 +13,10 @@ A simple npm package to generate mock data for testing purposes. It supports gen
 
 To install the package via npm, use:
 
-Example:
-This project is a **task management tool** designed to help users stay organized and increase productivity by allowing them to easily create, update, and track tasks.
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/username/repository-name.git
+    ```
 
 ```sh
 npm i data-crafter
