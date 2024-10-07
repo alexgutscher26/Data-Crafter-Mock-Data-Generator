@@ -1,0 +1,21 @@
+{
+  "name": "mock-data-generator",
+  "version": "1.0.0",
+  "description": "A package to generate mock data for testing",
+  "main": "src/index.js",
+  "scripts": {
+      "test": "jest"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/yourusername/mock-data-generator.git"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+      "faker": "^5.5.3"
+  },
+  "devDependencies": {
+      "jest": "^27.0.6"
+  }
+}
