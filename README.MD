@@ -24,6 +24,7 @@ If you want to use it as a local package for testing or development purposes, yo
 
 ```sh
 npm install ../path/to/data-crafter
+```
 
 ## Features
 - List your project features here.
