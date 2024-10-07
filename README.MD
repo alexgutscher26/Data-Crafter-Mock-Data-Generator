@@ -101,7 +101,7 @@ Here's an example of how a schema JSON file might look:
 
 We welcome contributions from everyone! Whether you’re a seasoned developer or just starting, your input can help us improve this project.
 
-Guidelines
+**Guidelines**
 Code Style: Please follow the existing code style and conventions used in the project. If applicable, run tests to ensure your changes do not break existing functionality.
 
 Documentation: If your changes introduce new features, please update the documentation accordingly. Clear documentation helps users understand how to use the new features.
