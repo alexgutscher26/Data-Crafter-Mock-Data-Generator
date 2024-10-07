@@ -9,11 +9,12 @@
   - [Usage](#usage)
   - [Contributing](#contributing)
   - [Reporting Issues](#reporting-issues)
-  - [Thank You!](#thank-you)
+  - [Thank You](#thank-you)
+  - [License](#license)
 
 ## About the Project
 
-A simple npm package to generate mock data for testing purposes. It supports generating various types of mock data such as users, products, addresses, transactions, reviews, and orders.
+A simple **npm package** to generate mock data for testing purposes. It supports generating various types of mock data such as users, products, addresses, transactions, reviews, and orders.
 
 ## Installation
 
@@ -115,6 +116,10 @@ We welcome contributions from everyone! Whether you’re a seasoned developer or
 
 If you encounter any bugs or have feature requests, please create a new issue in the issue tracker. Provide as much detail as possible to help us understand and address the problem effectively.
 
-## Thank You!
+## Thank You
 
 Thank you for considering contributing to our project! Every contribution helps us improve and grow. We appreciate your time and effort!
+
+## License
+
+This project is licensed under the MIT License.
