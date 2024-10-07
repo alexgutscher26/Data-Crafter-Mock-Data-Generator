@@ -44,9 +44,11 @@ Command: generate:user
 
 Options:
 
+```sh
 --count (optional): Number of users to generate (default is 1).
 --locale (optional): Locale for the generated data (default is 'en').
 --output (optional): File path to export the generated data as a JSON file.
+```
 
 Example Usage:
 
