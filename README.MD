@@ -5,15 +5,15 @@
 - [Mock Data Generator](#mock-data-generator)
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
+  - [Installation](#installation)
   - [Features](#features)
   - [Technologies Used](#technologies-used)
-  - [Installation](#installation)
 
 ## About the Project
 
 A simple npm package to generate mock data for testing purposes. It supports generating various types of mock data such as users, products, addresses, transactions, reviews, and orders.
 
-To install the package via npm, use:
+## Installation
 
 1. **Clone the repository:**
 
@@ -55,12 +55,3 @@ Example:
 - **Frontend:** React, Bootstrap
 - **Backend:** Node.js, Express
 - **Database:** MongoDB
-
-## Installation
-
-To get a local copy up and running, follow these simple steps:
-
-1. **Clone the repository:**
-
-   ```sh
-   git clone https://github.com/username/repository-name.git
