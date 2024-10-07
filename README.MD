@@ -14,9 +14,10 @@ A simple npm package to generate mock data for testing purposes. It supports gen
 To install the package via npm, use:
 
 1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/username/repository-name.git
-    ```
+
+```sh
+git clone https://github.com/alexgutscher26/Data-Crafter-Mock-Data-Generator
+ ```
 
 ```sh
 npm i data-crafter
