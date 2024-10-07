@@ -6,7 +6,8 @@ const {
     generateMockTransaction, 
     generateMockReview, 
     generateMockOrder, 
-    generateCustomData 
+    generateCustomData,
+    generateCustomSchemaData
 } = require('../src/index');
 
 // Test to generate a single mock user
@@ -57,7 +58,7 @@ test('generates multiple mock orders', () => {
     expect(orders[0]).toHaveProperty('totalAmount');
 });
 
-// Test to generate custom mock data based on a schema
+// Test to generate custom mock data based on a template schema
 test('generates custom data', () => {
     const schema = {
         id: '{{datatype.uuid}}',
@@ -69,4 +70,35 @@ test('generates custom data', () => {
     expect(data[0]).toHaveProperty('id');
     expect(data[0]).toHaveProperty('username');
     expect(data[0]).toHaveProperty('job');
+});
+
+// Test to generate custom schema data with types and constraints
+test('generates custom schema data with specific types and constraints', () => {
+    const userSchema = {
+        id: { type: 'string', pattern: '####-####-####' },  // Custom pattern
+        username: { type: 'string', length: 8 },            // String of length 8
+        age: { type: 'number', min: 18, max: 99 },           // Number between 18 and 99
+        birthDate: { type: 'date', min: '1990-01-01', max: '2030-12-31' },  // Date between 1990 and 2030
+    };
+
+    const customData = generateCustomSchemaData(userSchema, 3);
+    
+    expect(customData.length).toBe(3);
+    
+    customData.forEach((item) => {
+        expect(item).toHaveProperty('id');
+        expect(item.id).toMatch(/^\d{4}-\d{4}-\d{4}$/);  // Verify pattern
+
+        expect(item).toHaveProperty('username');
+        expect(item.username.length).toBe(8);  // Verify length
+
+        expect(item).toHaveProperty('age');
+        expect(item.age).toBeGreaterThanOrEqual(18);
+        expect(item.age).toBeLessThanOrEqual(99);  // Verify min and max for age
+
+        expect(item).toHaveProperty('birthDate');
+        const birthDate = new Date(item.birthDate);
+        expect(birthDate.getTime()).toBeGreaterThanOrEqual(new Date('1990-01-01').getTime());
+        expect(birthDate.getTime()).toBeLessThanOrEqual(new Date('2005-12-31').getTime());  // Verify date range
+    });
 });
