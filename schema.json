@@ -1,5 +1,7 @@
 {
-    "username": { "type": "string", "length": 10 },
-    "age": { "type": "integer", "min": 18, "max": 99 },
-    "email": { "type": "email" }
+    "username": {"type": "string", "length": 10},
+    "age": {"type": "integer", "min": 18, "max": 99},
+    "email": {"type": "email"},
+    "isActive": {"type": "boolean"},
+    "createdAt": {"type": "date", "min": "2000-01-01", "max": "2022-12-31"}
 }

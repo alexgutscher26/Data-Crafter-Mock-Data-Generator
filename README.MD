@@ -55,3 +55,41 @@ Example Usage:
 ```sh
 node src/cli.js generate:user --count 5 --locale de --output users.json
 ```
+
+2. Generate Custom Schema Data
+
+```sh
+Command: generate:custom
+```
+
+Options:
+
+```sh
+--schema (required): Path to a schema JSON file that defines the data structure.
+--count (optional): Number of data items to generate (default is 1).
+--locale (optional): Locale for the generated data (default is 'en').
+--output (optional): File path to export the generated data as a JSON file.
+```
+
+Example Usage:
+
+```sh
+node src/cli.js generate:custom --schema ./schema.json --count 10 --output custom_data.json
+```
+
+```sh
+Example Schema File (schema.json)
+```
+
+Here's an example of how a schema JSON file might look:
+
+```sh
+{
+    "username": {"type": "string", "length": 10},
+    "age": {"type": "integer", "min": 18, "max": 99},
+    "email": {"type": "email"},
+    "isActive": {"type": "boolean"},
+    "createdAt": {"type": "date", "min": "2000-01-01", "max": "2022-12-31"}
+}
+
+```
