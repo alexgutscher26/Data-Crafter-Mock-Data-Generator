@@ -11,4 +11,4 @@ npm i data-crafter
 If you want to use it as a local package for testing or development purposes, you can install it from a relative path:
 
 ```sh
-npm install ../path/to/mock-data-generator
+npm install ../path/to/data-crafter

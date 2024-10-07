@@ -1,6 +1,6 @@
 {
   "name": "data-crafter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package to generate mock data for testing",
   "main": "src/index.js",
   "scripts": {
@@ -16,7 +16,6 @@
     "faker": "^5.5.3"
   },
   "devDependencies": {
-    "@appnest/readme": "^1.2.7",
     "jest": "^27.0.6"
   }
 }
