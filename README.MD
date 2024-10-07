@@ -5,7 +5,7 @@ A simple npm package to generate mock data for testing purposes. It supports gen
 To install the package via npm, use:
 
 ```sh
-npm install mock-data-generator
+npm i data-crafter
 ```
 
 If you want to use it as a local package for testing or development purposes, you can install it from a relative path:
