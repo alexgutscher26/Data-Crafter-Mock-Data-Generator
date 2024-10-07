@@ -12,6 +12,25 @@
   },
   "author": "Alex G.",
   "license": "MIT",
+"keywords": [
+  "mock", 
+  "data", 
+  "generator", 
+  "testing", 
+  "mock-data-generator",
+  "faker",
+  "dummy-data",
+  "test-data",
+  "random",
+  "automation",
+  "fixtures",
+  "development",
+  "mocking",
+  "prototype",
+  "json-generator",
+  "api-testing",
+  "data-automation"
+],
   "dependencies": {
     "faker": "^5.5.3"
   },
