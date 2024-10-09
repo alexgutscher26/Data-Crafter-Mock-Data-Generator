@@ -120,6 +120,8 @@ If you encounter any bugs or have feature requests, please create a new issue in
 
 Thank you for considering contributing to our project! Every contribution helps us improve and grow. We appreciate your time and effort!
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H414GGXP)
+
 ## License
 
 This project is licensed under the MIT License.
