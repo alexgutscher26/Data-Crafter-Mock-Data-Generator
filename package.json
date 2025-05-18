@@ -1,10 +1,14 @@
 {
   "name": "data-crafter",
-  "version": "1.0.5",
-  "description": "A package to generate mock data for testing",
-  "main": "src/index.js",
+  "version": "2.0.0",
+  "description": "A modern package for generating mock data for testing and development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.js",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,7 +21,7 @@
     "data",
     "generator",
     "testing",
-    "mock-data-generator",
+    "typescript",
     "faker",
     "dummy-data",
     "test-data",
@@ -32,21 +36,29 @@
     "data-automation"
   ],
   "dependencies": {
+    "@faker-js/faker": "^8.0.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "csv-parse": "^5.5.6",
-    "data-crafter": "^1.0.1",
     "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "faker": "^5.5.3",
-    "fs": "^0.0.1-security",
-    "json2csv": "^6.0.0-alpha.2",
+    "express": "^4.18.2",
+    "json2csv": "^5.0.7",
     "jsonwebtoken": "^9.0.2",
     "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "jest": "^27.0.6"
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.11",
+    "@types/json2csv": "^5.0.7",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
   }
 }
