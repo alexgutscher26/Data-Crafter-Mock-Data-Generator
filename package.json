@@ -38,6 +38,7 @@
   "dependencies": {
     "@faker-js/faker": "^8.0.0",
     "csv-parse": "^5.5.6",
+    "data-crafter": "^2.0.5",
     "json2csv": "^5.0.7",
     "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1",
