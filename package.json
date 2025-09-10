@@ -1,6 +1,6 @@
 {
   "name": "data-crafter",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A modern package for generating mock data for testing and development",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

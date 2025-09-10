@@ -56,10 +56,13 @@ npm install ../path/to/data-crafter
 
 ## Usage
 
+All commands follow the pattern: `node src/cli.js <command> [options]`
+
 ### Generate Mock Users
 
+Command:
 ```sh
-Command: generate:user
+generate:user
 ```
 
 Options:
@@ -79,8 +82,9 @@ node src/cli.js generate:user --count 5 --locale de --output users.json --format
 
 ### Generate Custom Schema Data
 
+Command:
 ```sh
-Command: generate:custom
+generate:custom
 ```
 
 Options:
@@ -119,8 +123,9 @@ Here's an example of how a schema JSON file might look:
 
 ### Generate Data from Templates
 
+Command:
 ```sh
-Command: generate:template
+generate:template
 ```
 
 Options:
@@ -141,8 +146,9 @@ node src/cli.js generate:template --template user --count 5 --output users.json 
 
 ### List Available Templates
 
+Command:
 ```sh
-Command: list:templates
+list:templates
 ```
 
 Example Usage:
@@ -153,8 +159,9 @@ node src/cli.js list:templates
 
 ### Initialize Configuration
 
+Command:
 ```sh
-Command: init
+init
 ```
 
 This command creates a `.datacraftrc` configuration file and sample templates in the `templates/` directory.
@@ -167,8 +174,9 @@ node src/cli.js init
 
 ### Validate Schema
 
+Command:
 ```sh
-Command: validate:schema
+validate:schema
 ```
 
 Options:
