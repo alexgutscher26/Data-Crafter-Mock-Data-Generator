@@ -2,6 +2,10 @@
 
 name: Penify - Revolutionizing Documentation on GitHub
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   push:
     branches: ["main"]
