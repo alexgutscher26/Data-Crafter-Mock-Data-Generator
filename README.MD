@@ -1,5 +1,9 @@
 # Mock Data Generator
 
+[![npm version](https://img.shields.io/npm/v/data-crafter.svg)](https://www.npmjs.com/package/data-crafter)
+[![npm downloads](https://img.shields.io/npm/dm/data-crafter.svg)](https://www.npmjs.com/package/data-crafter)
+[![License](https://img.shields.io/npm/l/data-crafter.svg)](https://github.com/alexgutscher26/Data-Crafter-Mock-Data-Generator/blob/main/LICENSE)
+
 ## Table of Contents
 
 - [Mock Data Generator](#mock-data-generator)
@@ -7,6 +11,16 @@
   - [About the Project](#about-the-project)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Generate Mock Users](#generate-mock-users)
+    - [Generate Custom Schema Data](#generate-custom-schema-data)
+    - [Generate Data from Templates](#generate-data-from-templates)
+    - [List Available Templates](#list-available-templates)
+    - [Initialize Configuration](#initialize-configuration)
+    - [Validate Schema](#validate-schema)
+  - [Supported Data Types](#supported-data-types)
+  - [Configuration](#configuration)
+  - [Templates](#templates)
+  - [Export Formats](#export-formats)
   - [Contributing](#contributing)
   - [Reporting Issues](#reporting-issues)
   - [Thank You](#thank-you)
@@ -18,16 +32,18 @@ A simple **npm package** to generate mock data for testing purposes. It supports
 
 ## Installation
 
-1. **Clone the repository:**
-
-```sh
-git clone https://github.com/alexgutscher26/Data-Crafter-Mock-Data-Generator
- ```
-
-2. **Install:**
+1. **Install via npm:**
 
 ```sh
 npm i data-crafter
+```
+
+2. **Clone the repository:**
+
+```sh
+git clone https://github.com/alexgutscher26/Data-Crafter-Mock-Data-Generator
+cd Data-Crafter-Mock-Data-Generator
+npm install
 ```
 
 3. **Install as Local Package:**
@@ -40,7 +56,7 @@ npm install ../path/to/data-crafter
 
 ## Usage
 
-1. Generate Mock Users
+### Generate Mock Users
 
 ```sh
 Command: generate:user
@@ -51,16 +67,17 @@ Options:
 ```sh
 --count (optional): Number of users to generate (default is 1).
 --locale (optional): Locale for the generated data (default is 'en').
---output (optional): File path to export the generated data as a JSON file.
+--output (optional): File path to export the generated data.
+--format (optional): Output format (json, csv, xml) (default is 'json').
 ```
 
 Example Usage:
 
 ```sh
-node src/cli.js generate:user --count 5 --locale de --output users.json
+node src/cli.js generate:user --count 5 --locale de --output users.json --format csv
 ```
 
-2. Generate Custom Schema Data
+### Generate Custom Schema Data
 
 ```sh
 Command: generate:custom
@@ -72,24 +89,25 @@ Options:
 --schema (required): Path to a schema JSON file that defines the data structure.
 --count (optional): Number of data items to generate (default is 1).
 --locale (optional): Locale for the generated data (default is 'en').
---output (optional): File path to export the generated data as a JSON file.
+--output (optional): File path to export the generated data.
+--format (optional): Output format (json, csv, xml) (default is 'json').
 ```
 
 Example Usage:
 
 ```sh
-node src/cli.js generate:custom --schema ./schema.json --count 10 --output custom_data.json
+node src/cli.js generate:custom --schema ./schema.json --count 10 --output custom_data.json --format xml
 ```
 
 Example Schema File
 
-```sh
+```json
 (schema.json)
 ```
 
 Here's an example of how a schema JSON file might look:
 
-```sh
+```json
 {
     "username": {"type": "string", "length": 10},
     "age": {"type": "integer", "min": 18, "max": 99},
@@ -97,12 +115,158 @@ Here's an example of how a schema JSON file might look:
     "isActive": {"type": "boolean"},
     "createdAt": {"type": "date", "min": "2000-01-01", "max": "2022-12-31"}
 }
-
 ```
+
+### Generate Data from Templates
+
+```sh
+Command: generate:template
+```
+
+Options:
+
+```sh
+--template (required): Template name to use.
+--count (optional): Number of data items to generate (default is 1).
+--locale (optional): Locale for the generated data (default is 'en').
+--output (optional): File path to export the generated data.
+--format (optional): Output format (json, csv, xml) (default is 'json').
+```
+
+Example Usage:
+
+```sh
+node src/cli.js generate:template --template user --count 5 --output users.json --format csv
+```
+
+### List Available Templates
+
+```sh
+Command: list:templates
+```
+
+Example Usage:
+
+```sh
+node src/cli.js list:templates
+```
+
+### Initialize Configuration
+
+```sh
+Command: init
+```
+
+This command creates a `.datacraftrc` configuration file and sample templates in the `templates/` directory.
+
+Example Usage:
+
+```sh
+node src/cli.js init
+```
+
+### Validate Schema
+
+```sh
+Command: validate:schema
+```
+
+Options:
+
+```sh
+--schema (required): Path to a schema JSON file to validate.
+```
+
+Example Usage:
+
+```sh
+node src/cli.js validate:schema --schema ./schema.json
+```
+
+## Supported Data Types
+
+The following data types are supported in schemas:
+
+| Type | Description | Example |
+|------|-------------|---------|
+| `string` | Random string | "abc123" |
+| `number` | Random number | 42 |
+| `integer` | Random integer | 42 |
+| `float` | Random float | 42.5 |
+| `boolean` | Random boolean | true |
+| `date` | Random date | "2023-01-01T00:00:00.000Z" |
+| `email` | Random email | "<user@example.com>" |
+| `phone` | Random phone number | "+1-555-123-4567" |
+| `address` | Random address object | `{ street, city, country, zipCode }` |
+| `content` | Random content | "Lorem ipsum..." |
+| `creditCard` | Random credit card number | "4532-1234-5678-9012" |
+| `company` | Random company object | `{ name, catchPhrase, bs }` |
+| `ip` | Random IP address | "192.168.1.1" |
+| `url` | Random URL | "<https://example.com>" |
+| `currency` | Random currency object | `{ code, name, symbol }` |
+| `color` | Random color name | "red" |
+| `uuid` | Random UUID | "a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8" |
+| `image` | Random image URL | "<https://loremflickr.com/640/480>" |
+
+## Configuration
+
+The package supports a `.datacraftrc` configuration file in the project root:
+
+```json
+{
+  "locale": "en",
+  "defaultFormat": "json",
+  "outputDir": "./data",
+  "templates": {
+    "user": "./templates/user.json",
+    "product": "./templates/product.json"
+  }
+}
+```
+
+## Templates
+
+Templates are predefined schemas stored in JSON files. The package comes with sample templates for users and products.
+
+Example user template:
+
+```json
+{
+  "id": {
+    "type": "uuid"
+  },
+  "firstName": {
+    "type": "string"
+  },
+  "lastName": {
+    "type": "string"
+  },
+  "email": {
+    "type": "email"
+  },
+  "phone": {
+    "type": "phone"
+  },
+  "address": {
+    "type": "address"
+  },
+  "createdAt": {
+    "type": "date"
+  }
+}
+```
+
+## Export Formats
+
+The package supports exporting data in the following formats:
+
+- JSON
+- CSV
+- XML
 
 ## Contributing
 
-We welcome contributions from everyone! Whether you’re a seasoned developer or just starting, your input can help us improve this project.
+We welcome contributions from everyone! Whether you're a seasoned developer or just starting, your input can help us improve this project.
 
 **Guidelines Code Style**: Please follow the existing code style and conventions used in the project. If applicable, run tests to ensure your changes do not break existing functionality.
 

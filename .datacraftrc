@@ -1,0 +1,9 @@
+{
+  "locale": "en",
+  "defaultFormat": "json",
+  "outputDir": "./data",
+  "templates": {
+    "user": "./templates/user.json",
+    "product": "./templates/product.json"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": {
+    "type": "uuid"
+  },
+  "firstName": {
+    "type": "string"
+  },
+  "lastName": {
+    "type": "string"
+  },
+  "email": {
+    "type": "email"
+  },
+  "phone": {
+    "type": "phone"
+  },
+  "address": {
+    "type": "address"
+  },
+  "createdAt": {
+    "type": "date"
+  }
+}

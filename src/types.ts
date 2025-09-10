@@ -1,5 +1,6 @@
 export interface FieldSchema {
-    type: 'string' | 'number' | 'boolean' | 'date' | 'email' | 'phone' | 'address' | 'content';
+    type: 'string' | 'number' | 'boolean' | 'date' | 'email' | 'phone' | 'address' | 'content' | 
+          'creditCard' | 'company' | 'ip' | 'url' | 'currency' | 'color' | 'uuid' | 'image';
     pattern?: string;
     length?: number;
     min?: number;
@@ -7,6 +8,8 @@ export interface FieldSchema {
     float?: boolean;
     precision?: number;
     format?: 'sentence' | 'paragraph';
+    provider?: string; // For custom faker providers
+    options?: any[];   // For enum-like values
 }
 
 export interface DataSchema {
@@ -18,4 +21,13 @@ export interface DataGeneratorOptions {
     seed?: number;
     count?: number;
     format?: 'json' | 'csv' | 'xml';
+}
+
+export interface ConfigSchema {
+    locale: string;
+    defaultFormat: 'json' | 'csv' | 'xml';
+    outputDir: string;
+    templates: {
+        [key: string]: string;
+    };
 }

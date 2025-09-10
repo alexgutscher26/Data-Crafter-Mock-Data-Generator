@@ -1,0 +1,26 @@
+{
+  "id": {
+    "type": "uuid"
+  },
+  "name": {
+    "type": "string"
+  },
+  "price": {
+    "type": "number",
+    "min": 10,
+    "max": 1000
+  },
+  "description": {
+    "type": "content",
+    "format": "sentence"
+  },
+  "category": {
+    "type": "string"
+  },
+  "inStock": {
+    "type": "boolean"
+  },
+  "createdAt": {
+    "type": "date"
+  }
+}

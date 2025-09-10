@@ -37,80 +37,125 @@ exports.DataGenerator = void 0;
 const faker_1 = require("@faker-js/faker");
 const xmlbuilder = require("xmlbuilder");
 const json2csv = __importStar(require("json2csv"));
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
 class DataGenerator {
     constructor(options = {}) {
         this.seed = options.seed;
         this.locale = options.locale || 'en';
+        // For now, we'll use the default faker instance and set the locale
         this.fakerInstance = faker_1.faker;
-        this.fakerInstance.setLocale(this.locale);
+        if (this.seed) {
+            this.fakerInstance.seed(this.seed);
+        }
     }
     setLocale(locale) {
         this.locale = locale;
-        this.fakerInstance.setLocale(locale);
+        // In the newer version of faker, we can't change the locale of an existing instance
+        // We'll need to create a new approach for locale handling
+        console.warn('Locale setting is not fully supported in this version. Using default locale.');
     }
     setSeed(seed) {
         this.seed = seed;
-        faker_1.faker.seed(seed);
+        this.fakerInstance.seed(seed);
     }
     generateString(fieldSchema) {
         if (fieldSchema.pattern) {
-            return faker_1.faker.helpers.replaceSymbols(fieldSchema.pattern);
+            return this.fakerInstance.helpers.replaceSymbols(fieldSchema.pattern);
         }
         else if (fieldSchema.length) {
-            return faker_1.faker.string.alpha({ length: fieldSchema.length });
+            return this.fakerInstance.string.alpha({ length: fieldSchema.length });
         }
         else {
-            return faker_1.faker.string.alpha();
+            return this.fakerInstance.string.alpha();
         }
     }
     generateNumber(fieldSchema) {
         const min = fieldSchema.min ?? 0;
         const max = fieldSchema.max ?? 100;
         if (fieldSchema.float) {
-            return faker_1.faker.number.float({ min, max, precision: fieldSchema.precision || 0.01 });
+            return this.fakerInstance.number.float({ min, max, precision: fieldSchema.precision || 0.01 });
         }
         else {
-            return faker_1.faker.number.int({ min, max });
+            return this.fakerInstance.number.int({ min, max });
         }
     }
     generateBoolean() {
-        return faker_1.faker.datatype.boolean();
+        return this.fakerInstance.datatype.boolean();
     }
     generateDate(fieldSchema) {
         const minDate = fieldSchema.min ? new Date(fieldSchema.min) : new Date(2000, 0, 1);
         const maxDate = fieldSchema.max ? new Date(fieldSchema.max) : new Date();
-        return faker_1.faker.date.between({ from: minDate, to: maxDate }).toISOString();
+        return this.fakerInstance.date.between({ from: minDate, to: maxDate }).toISOString();
     }
     generateEmail() {
-        return faker_1.faker.internet.email();
+        return this.fakerInstance.internet.email();
     }
     generatePhoneNumber() {
-        return faker_1.faker.phone.number();
+        return this.fakerInstance.phone.number();
     }
     generateAddress() {
         return {
-            street: faker_1.faker.location.streetAddress(),
-            city: faker_1.faker.location.city(),
-            country: faker_1.faker.location.country(),
-            zipCode: faker_1.faker.location.zipCode()
+            street: this.fakerInstance.location.streetAddress(),
+            city: this.fakerInstance.location.city(),
+            country: this.fakerInstance.location.country(),
+            zipCode: this.fakerInstance.location.zipCode()
         };
     }
     generateUserContent(fieldSchema) {
         switch (fieldSchema.format) {
             case 'sentence':
-                return faker_1.faker.lorem.sentence();
+                return this.fakerInstance.lorem.sentence();
             case 'paragraph':
-                return faker_1.faker.lorem.paragraph();
+                return this.fakerInstance.lorem.paragraph();
             default:
                 throw new Error('Invalid content format');
         }
+    }
+    // New data generation methods
+    generateCreditCard() {
+        return this.fakerInstance.finance.creditCardNumber();
+    }
+    generateCompany() {
+        return {
+            name: this.fakerInstance.company.name(),
+            catchPhrase: this.fakerInstance.company.catchPhrase(),
+            bs: this.fakerInstance.company.bs()
+        };
+    }
+    generateIP() {
+        return this.fakerInstance.internet.ip();
+    }
+    generateURL() {
+        return this.fakerInstance.internet.url();
+    }
+    generateCurrency() {
+        return {
+            code: this.fakerInstance.finance.currencyCode(),
+            name: this.fakerInstance.finance.currencyName(),
+            symbol: this.fakerInstance.finance.currencySymbol()
+        };
+    }
+    generateColor() {
+        return this.fakerInstance.color.human();
+    }
+    generateUUID() {
+        return this.fakerInstance.string.uuid();
+    }
+    generateImage() {
+        return this.fakerInstance.image.imageUrl();
     }
     generate(schema, count = 1) {
         const results = [];
         for (let i = 0; i < count; i++) {
             const record = {};
             for (const [field, fieldSchema] of Object.entries(schema)) {
-                switch (fieldSchema.type) {
+                // Map legacy types to new types
+                let fieldType = fieldSchema.type;
+                if (fieldType === 'integer' || fieldType === 'float') {
+                    fieldType = 'number';
+                }
+                switch (fieldType) {
                     case 'string':
                         record[field] = this.generateString(fieldSchema);
                         break;
@@ -135,6 +180,31 @@ class DataGenerator {
                     case 'content':
                         record[field] = this.generateUserContent(fieldSchema);
                         break;
+                    // New data types
+                    case 'creditCard':
+                        record[field] = this.generateCreditCard();
+                        break;
+                    case 'company':
+                        record[field] = this.generateCompany();
+                        break;
+                    case 'ip':
+                        record[field] = this.generateIP();
+                        break;
+                    case 'url':
+                        record[field] = this.generateURL();
+                        break;
+                    case 'currency':
+                        record[field] = this.generateCurrency();
+                        break;
+                    case 'color':
+                        record[field] = this.generateColor();
+                        break;
+                    case 'uuid':
+                        record[field] = this.generateUUID();
+                        break;
+                    case 'image':
+                        record[field] = this.generateImage();
+                        break;
                     default:
                         throw new Error(`Unsupported field type: ${fieldSchema.type}`);
                 }
@@ -147,7 +217,7 @@ class DataGenerator {
         const users = this.generate(userSchema, userCount);
         const orders = [];
         for (let i = 0; i < orderCount; i++) {
-            const userId = faker_1.faker.helpers.arrayElement(users).id;
+            const userId = this.fakerInstance.helpers.arrayElement(users).id;
             const order = this.generate(orderSchema, 1)[0];
             order.userId = userId;
             orders.push(order);
@@ -165,13 +235,85 @@ class DataGenerator {
                 data.forEach(item => {
                     const element = root.ele('record');
                     Object.entries(item).forEach(([key, value]) => {
-                        element.ele(key).txt(value);
+                        if (typeof value === 'object' && value !== null) {
+                            const nestedElement = element.ele(key);
+                            Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+                                nestedElement.ele(nestedKey).txt(String(nestedValue));
+                            });
+                        }
+                        else {
+                            element.ele(key).txt(String(value));
+                        }
                     });
                 });
                 return root.end({ pretty: true });
             default:
                 throw new Error(`Unsupported format: ${format}`);
         }
+    }
+    // New methods for configuration and templates
+    loadConfig() {
+        const configPath = path.join(process.cwd(), '.datacraftrc');
+        if (fs.existsSync(configPath)) {
+            try {
+                const configContent = fs.readFileSync(configPath, 'utf-8');
+                return JSON.parse(configContent);
+            }
+            catch (error) {
+                console.error('Error loading configuration file:', error);
+                return null;
+            }
+        }
+        return null;
+    }
+    validateSchema(schema) {
+        // Basic schema validation
+        if (!schema || typeof schema !== 'object') {
+            return false;
+        }
+        for (const [field, fieldSchema] of Object.entries(schema)) {
+            if (!fieldSchema.type) {
+                return false;
+            }
+            // Map legacy types to new types
+            let fieldType = fieldSchema.type;
+            if (fieldType === 'integer' || fieldType === 'float') {
+                fieldType = 'number';
+            }
+            const validTypes = [
+                'string', 'number', 'boolean', 'date', 'email', 'phone', 'address', 'content',
+                'creditCard', 'company', 'ip', 'url', 'currency', 'color', 'uuid', 'image'
+            ];
+            if (!validTypes.includes(fieldType)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    generateFromTemplate(templateName, count) {
+        const config = this.loadConfig();
+        if (!config || !config.templates || !config.templates[templateName]) {
+            throw new Error(`Template '${templateName}' not found in configuration`);
+        }
+        const templatePath = path.join(process.cwd(), config.templates[templateName]);
+        if (!fs.existsSync(templatePath)) {
+            throw new Error(`Template file not found: ${templatePath}`);
+        }
+        try {
+            const schemaContent = fs.readFileSync(templatePath, 'utf-8');
+            const schema = JSON.parse(schemaContent);
+            return this.generate(schema, count);
+        }
+        catch (error) {
+            throw new Error(`Error loading template '${templateName}': ${error.message}`);
+        }
+    }
+    listTemplates() {
+        const config = this.loadConfig();
+        if (!config || !config.templates) {
+            return [];
+        }
+        return Object.keys(config.templates);
     }
 }
 exports.DataGenerator = DataGenerator;

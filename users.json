@@ -1,0 +1,62 @@
+[
+  {
+    "id": "57b15bdb-3aaf-44f9-bc51-12f34bf47acd",
+    "name": "l",
+    "email": "Justice4@hotmail.com",
+    "phone": "1-583-587-5171",
+    "address": {
+      "street": "15850 Mohr Lake",
+      "city": "Donaldville",
+      "country": "Colombia",
+      "zipCode": "57278-1825"
+    }
+  },
+  {
+    "id": "6636186a-7bb5-403d-a0d1-890ccb6efbeb",
+    "name": "N",
+    "email": "Mavis4@gmail.com",
+    "phone": "1-671-634-3749 x0012",
+    "address": {
+      "street": "6371 Carol Land",
+      "city": "Kihnburgh",
+      "country": "Israel",
+      "zipCode": "45836"
+    }
+  },
+  {
+    "id": "bc51aa8d-c13d-4160-8f57-4089d81a81b5",
+    "name": "q",
+    "email": "Ebba91@yahoo.com",
+    "phone": "1-479-282-6843",
+    "address": {
+      "street": "32811 N Division Street",
+      "city": "Lenoraland",
+      "country": "Aland Islands",
+      "zipCode": "49215-0791"
+    }
+  },
+  {
+    "id": "ba6090e9-dbf2-44d7-8c38-4444a2b8509b",
+    "name": "B",
+    "email": "Bernadine.Lowe@yahoo.com",
+    "phone": "855.749.0149 x47943",
+    "address": {
+      "street": "614 Spruce Street",
+      "city": "New Reinhold",
+      "country": "Togo",
+      "zipCode": "93077-4869"
+    }
+  },
+  {
+    "id": "4690e391-50f5-4aff-bf24-fd6659acd57e",
+    "name": "u",
+    "email": "Bridie.Pfannerstill30@hotmail.com",
+    "phone": "643-740-1602 x1606",
+    "address": {
+      "street": "97274 Sandringham Road",
+      "city": "Lesterstad",
+      "country": "Chile",
+      "zipCode": "29293-2611"
+    }
+  }
+]

@@ -1,8 +1,8 @@
-import { DataSchema } from './types';
+import { DataSchema, ConfigSchema } from './types';
 export declare class DataGenerator {
     private seed;
     private locale;
-    private readonly fakerInstance;
+    private fakerInstance;
     constructor(options?: {
         locale?: string;
         seed?: number;
@@ -17,10 +17,22 @@ export declare class DataGenerator {
     private generatePhoneNumber;
     private generateAddress;
     private generateUserContent;
+    private generateCreditCard;
+    private generateCompany;
+    private generateIP;
+    private generateURL;
+    private generateCurrency;
+    private generateColor;
+    private generateUUID;
+    private generateImage;
     generate(schema: DataSchema, count?: number): Record<string, any>[];
     generateWithRelationships(userSchema: DataSchema, orderSchema: DataSchema, userCount: number, orderCount: number): {
         users: Record<string, any>[];
         orders: Record<string, any>[];
     };
     exportData(data: Record<string, any>[], format: 'json' | 'csv' | 'xml'): string;
+    loadConfig(): ConfigSchema | null;
+    validateSchema(schema: DataSchema): boolean;
+    generateFromTemplate(templateName: string, count: number): Record<string, any>[];
+    listTemplates(): string[];
 }

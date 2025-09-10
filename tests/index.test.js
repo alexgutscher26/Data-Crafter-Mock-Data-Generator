@@ -3,8 +3,13 @@ const {
     generateMockUser, 
     generateCustomSchemaData,
     exportData,
+    loadConfig,
+    validateSchema,
+    generateFromTemplate,
+    listTemplates
 } = require('../src/index');
 const fs = require('fs');
+const path = require('path');
 
 describe('Mock Data Generator Tests', () => {
     // Cleanup exported files after tests
@@ -130,6 +135,48 @@ describe('Mock Data Generator Tests', () => {
         expect(xmlData).toContain('<?xml');  // Verify that XML header exists
         expect(xmlData).toContain('<entry>'); // Verify that data is structured as XML
     });
+
+    // Test schema validation
+    test('validates schema correctly', () => {
+        const validSchema = {
+            name: { type: 'string' },
+            age: { type: 'integer' },
+            email: { type: 'email' }
+        };
+
+        const invalidSchema = {
+            name: { type: 'string' },
+            age: { type: 'invalidtype' }
+        };
+
+        expect(validateSchema(validSchema)).toBe(true);
+        expect(validateSchema(invalidSchema)).toBe(false);
+    });
+
+    // Test new data types
+    test('generates new data types', () => {
+        const schema = {
+            creditCard: { type: 'creditCard' },
+            company: { type: 'company' },
+            ip: { type: 'ip' },
+            url: { type: 'url' },
+            currency: { type: 'currency' },
+            color: { type: 'color' },
+            uuid: { type: 'uuid' },
+            image: { type: 'image' }
+        };
+
+        const data = generateCustomSchemaData(schema, 1);
+        expect(data.length).toBe(1);
+
+        const item = data[0];
+        expect(item).toHaveProperty('creditCard');
+        expect(item).toHaveProperty('company');
+        expect(item).toHaveProperty('ip');
+        expect(item).toHaveProperty('url');
+        expect(item).toHaveProperty('currency');
+        expect(item).toHaveProperty('color');
+        expect(item).toHaveProperty('uuid');
+        expect(item).toHaveProperty('image');
+    });
 });
-
-
